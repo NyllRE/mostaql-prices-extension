@@ -3,8 +3,15 @@
    "name": "Vue Mostaql Extension",
    "description": "vue mostaql amongus",
    "version": "0.0.1",
-   "chrome_url_overrides": {
-      "newtab": "index.html"
+   "background": {
+      "service_worker": "src/background.js"
+   },
+   "content_scripts": [{
+      "matches": ["*.youtube.com"],
+      "js": ["src/contentScript.js"]
+   }],
+   "action": {
+      "default_title": "Mostaql Extension",
+      "default_popup": "index.html"
    }
-
 }
