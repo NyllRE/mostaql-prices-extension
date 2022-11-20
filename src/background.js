@@ -1,13 +1,8 @@
-chrome.tabs.onUpdated.addListener((tabId, tab) => {
-   if (tab.url && tab.url.includes("youtube.com/watch")) {
-      const queryParameters = tab.url.split("?")[1];
-      const urlParameters = new URLSearchParams(queryParameters);
-      console.log(urlParameters);
+const extensions = 'https://developer.chrome.com/docs/extensions'
+const webstore = 'https://developer.chrome.com/docs/webstore'
 
-      chrome.tabs.sendMessage(tabId, {
-         type: "NEW",
-         videoId: urlParameters.get("v"),
-         //=> can add more
-      })
-   }
-})
+chrome.runtime.onInstalled.addListener(() => {
+   chrome.action.setBadgeText({
+      text: "OFF",
+   });
+});

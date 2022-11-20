@@ -2,14 +2,15 @@
    "manifest_version": 3,
    "name": "Vue Mostaql Extension",
    "description": "vue mostaql amongus",
-   "version": "0.0.1",
-   "background": {
-      "service_worker": "src/background.js"
-   },
-   "content_scripts": [{
-      "matches": ["*.youtube.com"],
-      "js": ["src/contentScript.js"]
-   }],
+   "version": "0.1.0",
+  "permissions": ["activeTab"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [{
+      "matches": ["<all_urls>"],
+      "js": ["src/content.js"]
+    }],
    "action": {
       "default_title": "Mostaql Extension",
       "default_popup": "index.html"
