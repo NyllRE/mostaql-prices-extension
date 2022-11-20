@@ -1,0 +1,10 @@
+{
+   "manifest_version": 3,
+   "name": "Vue Mostaql Extension",
+   "description": "vue mostaql amongus",
+   "version": "0.0.1",
+   "chrome_url_overrides": {
+      "newtab": "index.html"
+   }
+
+}
