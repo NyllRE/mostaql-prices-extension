@@ -1,27 +1,33 @@
 const input = document.querySelector("#bid__cost")
 const defaultCostVal = document.querySelector("#bid__realCost")
+
+
+//=>> getting the price
 const price = async () => {
    return await getCurrency(["TRY"])
 }
 
+
 //=>> removing the old text displayer
 document.querySelector("#bid-form_container > div:nth-child(1) > div.form-group.col-md-4.col-sm-4.hidden-xs").remove()
+
 
 //=>> adding a new selector
 const oldCostValue = document
    .querySelector("#bid-form_container > div:nth-child(1)")
-
 const costValue = document.createElement("div")
-
 oldCostValue.append(costValue)
 
 
-costValue.innerHTML = `<h3 style="display: grid; place-items: center">Add price to view</h3>`
-
+// defaultCostVal.addEventListener("load", async () => {
+   
+//    console.log(await loadHTML('components/placeholder.html'));
+// })
 
 
 input.addEventListener("input", async () => {
-   await convert(costValue)
+   costValue.innerHTML = await loadHTML("./components/placeholder.html")
+   // await convert(costValue)
 })
 
 const convert = async (displayText) => {
@@ -38,5 +44,14 @@ const getCurrency = async (currencies) => {
       .then((response) => response.json())
       .then((data) => {
          return data.data.TRY
+      });
+}
+
+const loadHTML = async (file) => {
+   return await fetch(file)
+      .then(response => response.text())
+      .then(text => {
+         console.log(text)
+         return text
       });
 }
