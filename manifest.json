@@ -1,7 +1,7 @@
 {
    "manifest_version": 3,
-   "name": "Vue Mostaql Extension",
-   "description": "vue mostaql amongus",
+   "name": "Mostaql Fees",
+   "description": "calculates the final fee of mostaql and other 3rd parties",
    "version": "0.1.0",
   "permissions": ["activeTab"],
   "background": {
@@ -12,7 +12,7 @@
       "js": ["src/content.ts"]
     }],
    "action": {
-      "default_title": "Mostaql Extension",
+      "default_title": "Mostaql Fees",
       "default_popup": "index.html"
    }
 }

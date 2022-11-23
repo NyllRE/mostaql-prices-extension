@@ -1,3 +1,3 @@
 # mostaql-extension
 
-lmao
+A tool to calculate the final fees of mostaql.
