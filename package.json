@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@crxjs/vite-plugin": "^1.0.14",
+    "chrome-types": "^0.1.151",
     "pug": "^3.0.2",
-    "vite": "^3.2.4"
+    "vite": "^3.2.4",
+    "vite-plugin-chrome-extension": "^0.0.7"
   },
   "devDependencies": {
     "eslint": "^8.22.0",
