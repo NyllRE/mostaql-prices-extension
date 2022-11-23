@@ -1,18 +1,20 @@
 {
-   "manifest_version": 3,
-   "name": "Mostaql Fees",
-   "description": "calculates the final fee of mostaql and other 3rd parties",
-   "version": "0.1.1",
+  "manifest_version": 3,
+  "name": "Mostaql Fees",
+  "description": "calculates the final fee of mostaql and other 3rd parties",
+  "version": "0.1.2",
   "permissions": ["activeTab"],
   "background": {
     "service_worker": "src/background.ts"
   },
-  "content_scripts": [{
+  "content_scripts": [
+    {
       "matches": ["https://mostaql.com/project/*"],
       "js": ["src/content.ts"]
-    }],
-   "action": {
-      "default_title": "Mostaql Fees",
-      "default_popup": "index.html"
-   }
+    }
+  ],
+  "action": {
+    "default_title": "Mostaql Fees",
+    "default_popup": "popup.html"
+  }
 }

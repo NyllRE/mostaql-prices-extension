@@ -17,7 +17,7 @@ export const convert = async ({
   }TL</h4>`
 }
 
-const getCurrency = async (currencies: string[]): Promise<number> => {
+export const getCurrency = async (currencies: string[]): Promise<number> => {
   return await fetch(
     `https://api.freecurrencyapi.com/v1/latest?apikey=sSLJqP6lGUy4wgKna5CEVjSgcThLX1ml0eY9ZN8G&currencies=${
       currencies.join('%2C') || 'EUR%2CUSD%2CCAD%2CTRY'

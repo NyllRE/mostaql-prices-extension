@@ -1,6 +1,19 @@
-import { convert } from './api'
+import { convert, getCurrency } from './api'
 
 const input = document.querySelector<HTMLInputElement>('#bid__cost')
+
+//=>> share data to popup
+chrome.runtime.onMessage.addListener((msg, sender, response) => {
+  if (msg.from === 'popup' && msg.subject === 'paymentInfo') {
+    getCurrency(['TRY']).then((data) => {
+      response({
+        originalPrice: Number(input!.value),
+        try: data,
+      })
+    })
+  }
+  return true
+})
 
 //=>> removing the old text displayer
 document
