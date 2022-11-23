@@ -31,7 +31,7 @@ input?.addEventListener('input', async () => {
   await convert(costValue)
 })
 
-const convert = async (displayText) => {
+const convert = async (displayText: HTMLElement) => {
   const numToTL = Math.round(Number(input?.value) * (await price) * 0.8)
   displayText.style.direction = `ltr`
   displayText.innerHTML = `<h4 style="display: grid; place-items: center;margin: 1.7em 0">${numToTL} - 70 = ${
@@ -39,7 +39,7 @@ const convert = async (displayText) => {
   }TL</h4>`
 }
 
-const getCurrency = async (currencies): Promise<number> => {
+const getCurrency = async (currencies: string[]): Promise<number> => {
   return await fetch(
     `https://api.freecurrencyapi.com/v1/latest?apikey=sSLJqP6lGUy4wgKna5CEVjSgcThLX1ml0eY9ZN8G&currencies=${
       currencies.join('%2C') || 'EUR%2CUSD%2CCAD%2CTRY'
