@@ -1,10 +1,6 @@
-const input = document.querySelector<HTMLInputElement>('#bid__cost')
+import { convert } from './api'
 
-let price: Promise<number>
-//=>> getting the price
-const priceGetter = async (): Promise<number> => {
-  return await getCurrency(['TRY'])
-}
+const input = document.querySelector<HTMLInputElement>('#bid__cost')
 
 //=>> removing the old text displayer
 document
@@ -20,7 +16,6 @@ const oldCostValue = document.querySelector(
 const costValue = document.createElement('div')
 
 window.addEventListener('load', async () => {
-  price = priceGetter()
   costValue.innerHTML = `<h4 style="display: grid; place-items: center;margin: 1.7em 0">
    Add price to view in html
    </h4>`
@@ -28,25 +23,9 @@ window.addEventListener('load', async () => {
 })
 
 input?.addEventListener('input', async () => {
-  await convert(costValue)
+  await convert({
+    displayText: costValue,
+    originalPrice: Number(input.value),
+    currencies: ['TRY'],
+  })
 })
-
-const convert = async (displayText: HTMLElement) => {
-  const numToTL = Math.round(Number(input?.value) * (await price) * 0.8)
-  displayText.style.direction = `ltr`
-  displayText.innerHTML = `<h4 style="display: grid; place-items: center;margin: 1.7em 0">${numToTL} - 70 = ${
-    numToTL - 70
-  }TL</h4>`
-}
-
-const getCurrency = async (currencies: string[]): Promise<number> => {
-  return await fetch(
-    `https://api.freecurrencyapi.com/v1/latest?apikey=sSLJqP6lGUy4wgKna5CEVjSgcThLX1ml0eY9ZN8G&currencies=${
-      currencies.join('%2C') || 'EUR%2CUSD%2CCAD%2CTRY'
-    }`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      return data.data.TRY
-    })
-}
