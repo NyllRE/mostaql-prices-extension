@@ -1,12 +1,19 @@
 import { convert, getCurrency } from './api'
 
-
+/** the recieved input field */
 const input = document.querySelector<HTMLInputElement>('#bid__cost');
-let averagePrice = document
-	.querySelector<HTMLSpanElement>(
-		'#project-meta-panel > div:nth-child(1) > table > tbody > tr:nth-child(5) > td:nth-child(2) > span'
-	)
-	?.innerHTML.slice(1);
+
+/** this is taken from the average price value to then be used to notify you earlier that you should put a higher price than that */
+let averagePrice: Number | undefined = Number(
+	document
+		.querySelector(
+			'#project-meta-panel > div:nth-child(1) > table > tbody > tr:nth-child(5) > td:nth-child(2) > span'
+		)
+		?.innerHTML.slice(1)
+);
+
+//=>> this is bothering me, it shouldn't have an autocomplete lmao??
+input?.setAttribute('autocomplete', 'off');
 
 //=>> share data to popup
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
@@ -15,6 +22,7 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
 			response({
 				originalPrice: Number(input!.value),
 				try: data,
+				priceLimit: averagePrice,
 			});
 		});
 	}
@@ -35,7 +43,7 @@ const oldCostValue = document.querySelector(
 const costValue = document.createElement('div');
 
 window.addEventListener('load', async () => {
-	costValue.innerHTML = `<h4 style="display: grid; place-items: center;margin: 1.7em 0">
+	costValue.innerHTML = `<h4 style="display: grid; place-items: center;margin: 1.7em 0"; text-align: center>
    Add price to view in html
    </h4>`;
 	oldCostValue?.append(costValue);
