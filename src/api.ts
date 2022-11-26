@@ -1,21 +1,24 @@
 interface ConvertOptions {
-  displayText: HTMLElement
-  originalPrice: number
-  currencies: string[]
+	displayText: HTMLElement;
+	originalPrice: number;
+	currencies: string[];
+	leastAmount: Number;
 }
 
 export const convert = async ({
 	displayText,
 	originalPrice, //=> in USD
 	currencies,
+	leastAmount,
 }: ConvertOptions) => {
-	if (originalPrice < 25) {
-		displayText.innerHTML = `your fee should be 25$ or more`;
+	displayText.style.direction = `ltr`;
+	if (originalPrice < 25 || originalPrice < leastAmount) {
+		const shouldBe = leastAmount >= 25 ? leastAmount : 25;
+		displayText.innerHTML = `<h4 style="display: grid; place-items: center;margin: 1.7em 0; text-align: center">Price should be ${shouldBe}$ or more.</h4>`;
 		return;
 	}
 	const price = await getCurrency([...currencies]);
 	const numToTL = Math.round(originalPrice * price * 0.8 * 0.96);
-	displayText.style.direction = `ltr`;
 	displayText.innerHTML = `<h4 style="display: grid; place-items: center;margin: 1.7em 0">${numToTL} - 70 = ${
 		numToTL - 70
 	}₺</h4>`;
