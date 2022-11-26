@@ -15,9 +15,8 @@ export const convert = async ({
 		return;
 	}
 	const price = await getCurrency([...currencies]);
-	const numToTL = Math.round(originalPrice * price * 0.8 * 0.96 - 70);
-	displayText.value = `${numToTL}`;
-	console.log(displayText.value, numToTL);
+	const numToTL = Math.round(originalPrice * price * 0.8 * 0.96);
+	displayText.value = `${numToTL} - 70 = ${numToTL - 70}₺`;
 };
 
 export const getCurrency = async (currencies: string[]): Promise<number> => {

@@ -13,9 +13,9 @@ window.addEventListener('DOMContentLoaded', () => {
         { from: 'popup', subject: 'paymentInfo' },
         (paymentInfo) => {
           warner.innerText = ''
-          if (paymentInfo.originalPrice < 25) {
+          if (paymentInfo.originalPrice < paymentInfo.priceLimit) {
             result.style.color = warner.style.color = "#df4578"
-            warner.innerText = "Price should be higher than 25$"
+            warner.innerText = `Price should be higher than ${paymentInfo.priceLimit}$`
           }
           const mostaqlFee = paymentInfo.originalPrice * 0.8
           const paypalFee = mostaqlFee * 0.96

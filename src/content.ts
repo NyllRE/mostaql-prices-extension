@@ -3,13 +3,16 @@ import { convert, getCurrency } from './api'
 /** the recieved input field */
 const input = document.querySelector<HTMLInputElement>('#bid__cost');
 
+
+
 /** this is taken from the average price value to then be used to notify you earlier that you should put a higher price than that */
-let averagePrice: Number | undefined = Number(
+const leastPrice: Number | undefined = Number(
 	document
-		.querySelector(
-			'#project-meta-panel > div:nth-child(1) > table > tbody > tr:nth-child(5) > td:nth-child(2) > span'
-		)
-		?.innerHTML.slice(1)
+		.querySelector<HTMLElement>(
+			'#project-meta-panel > div:nth-child(1) > table > tbody > tr:nth-child(3) > td:nth-child(2) > span'
+		)!
+		.innerText.split(' - ')[0]
+		.slice(1)
 );
 
 //=>> this is bothering me, it shouldn't have an autocomplete lmao??
@@ -22,7 +25,7 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
 			response({
 				originalPrice: Number(input!.value),
 				try: data,
-				priceLimit: averagePrice,
+				priceLimit: leastPrice,
 			});
 		});
 	}
