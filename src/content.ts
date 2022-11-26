@@ -29,31 +29,21 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
 	return true;
 });
 
-//=>> removing the old text displayer
-document
-	.querySelector(
-		'#bid-form_container > div:nth-child(1) > div.form-group.col-md-4.col-sm-4.hidden-xs'
-	)
-	?.remove();
+//=>> displaying value in the other thingy
+// const costValue = document.querySelector<HTMLInputElement>(
+// 	'#bid-form_container > div:nth-child(1) > div.form-group.col-md-4.col-sm-4.hidden-xs'
+// );
 
-//=>> adding a new selector
-const oldCostValue = document.querySelector(
-	'#bid-form_container > div:nth-child(1)'
-);
-const costValue = document.createElement('div');
 
-window.addEventListener('load', async () => {
-	costValue.innerHTML = `<h4 style="display: grid; place-items: center;margin: 1.7em 0"; text-align: center>
-   Add price to view in html
-   </h4>`;
-	oldCostValue?.append(costValue);
-});
-
-input?.addEventListener('input', async () => {
-	await convert({
-		displayText: costValue,
-		originalPrice: Number(input.value),
-		currencies: ['TRY'],
-		leastAmount: Number(averagePrice),
-	});
-});
+// input?.addEventListener('input', async () => {
+// 	console.log('before');
+// 	await setTimeout(async () => {
+// 		await convert({
+// 			displayText: costValue!,
+// 			originalPrice: Number(input.value),
+// 			currencies: ['TRY'],
+// 		});
+// 		console.log('in');
+// 	}, 1000);
+// 	console.log('after');
+// });
