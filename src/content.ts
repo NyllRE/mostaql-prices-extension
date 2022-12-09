@@ -2,11 +2,13 @@ import { convert, getCurrency } from './api'
 
 /** the recieved input field */
 const input = document.querySelector<HTMLInputElement>('#bid__cost');
-
-
+// || document.querySelector<HTMLSpanElement>(
+// 	'#bid5239326 > div > div.vertical-meta > div > div:nth-child(1) > div > span'
+// );
+console.log(input);
 
 /** this is taken from the average price value to then be used to notify you earlier that you should put a higher price than that */
-const leastPrice: Number | undefined = Number(
+const leastPrice: Number = Number(
 	document
 		.querySelector<HTMLElement>(
 			'#project-meta-panel > div:nth-child(1) > table > tbody > tr:nth-child(3) > td:nth-child(2) > span'
@@ -31,22 +33,3 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
 	}
 	return true;
 });
-
-//=>> displaying value in the other thingy
-// const costValue = document.querySelector<HTMLInputElement>(
-// 	'#bid-form_container > div:nth-child(1) > div.form-group.col-md-4.col-sm-4.hidden-xs'
-// );
-
-
-// input?.addEventListener('input', async () => {
-// 	console.log('before');
-// 	await setTimeout(async () => {
-// 		await convert({
-// 			displayText: costValue!,
-// 			originalPrice: Number(input.value),
-// 			currencies: ['TRY'],
-// 		});
-// 		console.log('in');
-// 	}, 1000);
-// 	console.log('after');
-// });
