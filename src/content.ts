@@ -10,7 +10,7 @@ console.log(input);
 /** this is taken from the average price value to then be used to notify you earlier that you should put a higher price than that */
 const leastPrice: Number = Number(
 	document
-		.querySelector<HTMLElement>(
+		.querySelector<HTMLInputElement>(
 			'#project-meta-panel > div:nth-child(1) > table > tbody > tr:nth-child(3) > td:nth-child(2) > span'
 		)!
 		.innerText.split(' - ')[0]
