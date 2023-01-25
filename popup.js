@@ -1,29 +1,34 @@
 const result = document.getElementById('result')
 const warner = document.getElementById('warning')
 
-window.addEventListener('DOMContentLoaded', () => {
-  chrome.tabs.query(
-    {
-      active: true,
-      currentWindow: true,
-    },
-    (tabs) => {
-      chrome.tabs.sendMessage(
-        tabs[0].id,
-        { from: 'popup', subject: 'paymentInfo' },
-        (paymentInfo) => {
-          warner.innerText = ''
-          if (paymentInfo.originalPrice < paymentInfo.priceLimit) {
-            result.style.color = warner.style.color = "#df4578"
-            warner.innerText = `Price should be higher than ${paymentInfo.priceLimit}$`
-          }
-          const mostaqlFee = paymentInfo.originalPrice * 0.8
-          const paypalFee = mostaqlFee * 0.96
-          const finalPrice = paypalFee * paymentInfo.try - 70
-          result.innerText = !paymentInfo.originalPrice
-            ? 'N/A' : `${Math.floor(finalPrice)}₺`
-        }
-      )
+const onPaymentInfo = ({ originalPrice, priceLimit, TRY }) => {
+  if (originalPrice) {
+    warner.innerText = ''
+    if (originalPrice < priceLimit) {
+      result.style.color = warner.style.color = '#df4578'
+      warner.innerText = `Price should be higher than ${priceLimit}$`
     }
-  )
+
+    const mostaqlFee = originalPrice * 0.8
+    const paypalFee = mostaqlFee * 0.96
+    const finalPrice = paypalFee * TRY - 70
+
+    result.innerText = `${Math.floor(finalPrice)}₺`
+  } else {
+    result.innerText = 'N/A'
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const queryInfo = {
+    active: true,
+    currentWindow: true,
+  }
+
+  chrome.tabs.query(queryInfo, (tabs) => {
+    const tabId = tabs[0].id
+    const messageInfo = { from: 'popup', subject: 'paymentInfo' }
+
+    chrome.tabs.sendMessage(tabId, messageInfo, onPaymentInfo)
+  })
 })
