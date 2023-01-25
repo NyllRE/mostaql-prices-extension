@@ -1,0 +1,38 @@
+{
+  "todotree": {
+    "tree": [
+      {
+        "key": 1674675760701,
+        "children": [],
+        "todo": {
+          "content": "Adding a profit calculator to the total balance",
+          "id": 1674675760701,
+          "level": "default",
+          "done": false,
+          "focus": false
+        }
+      },
+      {
+        "key": 1674675922438,
+        "children": [],
+        "todo": {
+          "content": "Calculate the price of an offer after posting it",
+          "id": 1674675922438,
+          "level": "default",
+          "done": false
+        }
+      }
+    ],
+    "expandKeys": [
+      1674675760701
+    ],
+    "schema": "https://github.com/Saber2pr/vsc-ext-todolist/blob/master/src/api/type.ts#L3",
+    "add_mode": "bottom",
+    "virtual": false,
+    "showLine": false,
+    "playFontSize": 24,
+    "title": ".todo",
+    "autoSort": false,
+    "lang": "en"
+  }
+}
