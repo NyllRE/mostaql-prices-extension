@@ -1,21 +1,25 @@
-const result = document.getElementById('result')
+const tryPrice = document.getElementById('try-price')
+const usdPrice = document.getElementById('usd-price')
 const warner = document.getElementById('warning')
 
 const onPaymentInfo = ({ originalPrice, priceLimit, TRY }) => {
   if (originalPrice) {
     warner.innerText = ''
     if (originalPrice < priceLimit) {
-      result.style.color = warner.style.color = '#df4578'
+      tryPrice.style.color = warner.style.color = '#df4578'
       warner.innerText = `Price should be higher than ${priceLimit}$`
     }
 
     const mostaqlFee = originalPrice * 0.8
     const paypalFee = mostaqlFee * 0.96
-    const finalPrice = paypalFee * TRY - 70
+    const tryFinalPrice = paypalFee * TRY - 70
+    const usdFinalPrice = tryFinalPrice / TRY
 
-    result.innerText = `${Math.floor(finalPrice)}₺`
+    tryPrice.innerText = `${Math.floor(tryFinalPrice)}₺`
+    usdPrice.innerText = `$${Math.floor(usdFinalPrice)}`
   } else {
-    result.innerText = 'N/A'
+    tryPrice.innerText = 'N/A'
+    usdPrice.innerText = 'N/A'
   }
 }
 
