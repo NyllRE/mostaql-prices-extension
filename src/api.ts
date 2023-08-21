@@ -1,11 +1,13 @@
 interface ConvertOptions {
 	displayText: HTMLInputElement;
+	taxedPrice: number;
 	originalPrice: number;
 	currencies: string[];
 }
 
 export const convert = async ({
 	displayText,
+	taxedPrice,
 	originalPrice, //=> in USD
 	currencies,
 }: ConvertOptions) => {
@@ -15,7 +17,7 @@ export const convert = async ({
 		return;
 	}
 	const price = await getCurrency([...currencies]);
-	const numToTL = Math.round(originalPrice * price * 0.8 * 0.96);
+	const numToTL = Math.round(taxedPrice * price * 0.8 * 0.96);
 	displayText.value = `${numToTL} - 70 = ${numToTL - 70}₺`;
 };
 

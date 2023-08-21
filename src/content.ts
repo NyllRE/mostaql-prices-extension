@@ -1,13 +1,14 @@
 import { convert, getCurrency } from './api'
 
-/** the recieved input field */
+//? the recieved input field
 const input = document.querySelector<HTMLInputElement>('#bid__cost')
-// || document.querySelector<HTMLSpanElement>(
-// 	'#bid5239326 > div > div.vertical-meta > div > div:nth-child(1) > div > span'
-// );
-console.log(input)
+const inputReal = document.querySelector<HTMLInputElement>('#bid__realCost');
 
-/** this is taken from the average price value to then be used to notify you earlier that you should put a higher price than that */
+
+/**
+ * ?  @example this is taken from the average price value to then be used to notify you earlier that you should put a higher price than that
+ * => Least Price From the Budget
+*/
 const leastPrice: Number = Number(
   document
     .querySelector<HTMLInputElement>(
@@ -17,15 +18,16 @@ const leastPrice: Number = Number(
     .slice(1)
 )
 
-//=>> this is bothering me, it shouldn't have an autocomplete lmao??
+//? this is bothering me, it shouldn't have an autocomplete lmao??
 input?.setAttribute('autocomplete', 'off')
 
-//=>> share data to popup
+//=> share data to popup
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
   if (msg.from === 'popup' && msg.subject === 'paymentInfo') {
     getCurrency(['TRY']).then((data) => {
       response({
         originalPrice: Number(input!.value),
+        taxedPrice: Number(inputReal!.value),
         TRY: data,
         priceLimit: leastPrice,
       })
